@@ -1,0 +1,95 @@
+{
+  "address_components": [
+    {
+      "long_name": "22",
+      "short_name": "22",
+      "types": [
+        "street_number",
+        "address"
+      ]
+    },
+    {
+      "long_name": "Stadsgårdshamnen",
+      "short_name": "Stadsgårdshamnen",
+      "types": [
+        "route",
+        "address"
+      ]
+    },
+    {
+      "long_name": "Södermalm",
+      "short_name": "Södermalm",
+      "types": [
+        "sublocality_level_1",
+        "sublocality",
+        "political",
+        "address"
+      ]
+    },
+    {
+      "long_name": "Stockholm",
+      "short_name": "Stockholm",
+      "types": [
+        "postal_town",
+        "address"
+      ]
+    },
+    {
+      "long_name": "Stockholms län",
+      "short_name": "Stockholms län",
+      "types": [
+        "administrative_area_level_1",
+        "political",
+        "address"
+      ]
+    },
+    {
+      "long_name": "Sweden",
+      "short_name": "SE",
+      "types": [
+        "country",
+        "political"
+      ]
+    },
+    {
+      "long_name": "116 45",
+      "short_name": "116 45",
+      "types": [
+        "postal_code",
+        "address"
+      ]
+    }
+  ],
+  "adr_address": "<span class=\"street-address\">Stadsgårdshamnen 22</span>, <span class=\"postal-code\">116 45</span> <span class=\"locality\">Stockholm</span>, <span class=\"country-name\">Sweden</span>",
+  "formatted_address": "Stadsgårdshamnen 22, 116 45 Stockholm, Sweden",
+  "geometry": {
+    "location": {
+      "lat": 59.3177862,
+      "lng": 18.0849876
+    },
+    "viewport": {
+      "south": 59.31643721970849,
+      "west": 18.08363861970849,
+      "north": 59.31913518029149,
+      "east": 18.0863365802915
+    }
+  },
+  "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/geocode-71.png",
+  "icon_background_color": "#7B9EB0",
+  "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+  "name": "Stadsgårdshamnen 22",
+  "place_id": "ChIJ00000000000000000000000",
+  "plus_code": {
+    "compound_code": "8394+4X Stockholm, Sweden",
+    "global_code": "9FFW8394+4X"
+  },
+  "reference": "ChIJ00000000000000000000000",
+  "types": [
+    "street_address"
+  ],
+  "url": "https://maps.google.com/?q=Stadsgårdshamnen+22,+116+45+Stockholm,+Sweden&ftid=0x0:0x0",
+  "utc_offset": 120,
+  "vicinity": "Södermalm",
+  "html_attributions": [],
+  "utc_offset_minutes": 120
+}
