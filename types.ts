@@ -1,7 +1,7 @@
 import { reader } from './reader';
 
 export type Reader = ReturnType<typeof reader>;
-export type ReaderReadOnly = Pick<Reader, 'look' | 'lookAhead' | 'lookBack' | 'more'>
+export type ReaderReadOnly = Pick<Reader, 'look' | 'lookAhead' | 'lookBack' | 'more'>;
 
 export type ILCode = {
   text?: string;
@@ -33,7 +33,7 @@ export enum TokenName {
   ROOT = 'ROOT',
   FILTER_EXPRESSION = 'FILTER_EXPRESSION',
   NOT_EMPTY = 'NOT_EMPTY',
-  SPACESHIP = 'SPACESHIP'
+  SPACESHIP = 'SPACESHIP',
 }
 
 export type Token<T> = {
@@ -43,9 +43,9 @@ export type Token<T> = {
   children: Token<any>[],
   ignore?: boolean,
   context?: TContext
-}
+};
 
 export type Tokenizer = <T>(reader: Reader, token: Token<T>) => void;
 
-export type Rule = [(r: ReaderReadOnly) => boolean, TokenName, Tokenizer]
+export type Rule = [(r: ReaderReadOnly) => boolean, TokenName, Tokenizer];
 

@@ -3,7 +3,7 @@ import { Tokenizer, Reader, Token, TokenName, Rule } from '../types';
 export const createToken = <T>(parent: Token<T>, name: TokenName): Token<T> => ({
   token: name,
   parent,
-  children: []
+  children: [],
 });
 
 export const eater = <T>(reader: Reader, token: Token<T>) => {
@@ -28,7 +28,6 @@ export const eater = <T>(reader: Reader, token: Token<T>) => {
 
   return {
     swallow,
-    digest
+    digest,
   };
 };
-// eater.breaker = (cond) => [(r: Reader) => cond(r), TokenName.NOOP, () => ({})];

@@ -10,5 +10,5 @@ export const interpolation = (obj: Record<string, unknown>) => ({
     const t = tokenizer(r);
     const il = parser(obj, t);
     return interpret(il);
-  }
+  },
 });
