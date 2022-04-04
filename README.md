@@ -129,12 +129,15 @@ const result = isGB ?
 ```
 
 ## Interpolation query language
+
+### Syntax
 ```
 QUERY_LANGUAGE =  0*1GROUP 0*1SPACESHIP 0*1FIELD 0*1TEXT
 GROUP = "{" QUERY_LANGUAGE "}"
 SPACESHIP = "<" QUERY_LANGUAGE ">"
 FILTER_OP = "*=" / "~=" / "*=" / "!=" / "|="
-FILTER = "[" ( FIELD FILTER_OP ALPHA  /  FIELD ) [","] "]"
+FILTER_OPERAND = (FIELD FILTER_OP ALPHA)  /  FIELD
+FILTER = "[" FILTER_OPERAND / 1* ( "," FILTER_OPERAND ) "]"
 FIELD = "." 1*ALPHA [ FILTER / FIELD ]
 TEXT = 1*ALPHA
 ```
@@ -168,7 +171,7 @@ const address = item?.long_name
 ```
 
 ### FILTER
-FILTER = "[" ( FIELD FILTER_OP ALPHA  /  FIELD ) [","] "]"
+FILTER = "[" FILTER_OPERAND / FILTER_OPERAND *( "," FILTER_OPERAND ) "]"
 
 `[field_name=some_string, ...]` for equals
 `[field_name!=some_string]` for not equals
@@ -229,35 +232,4 @@ example:
 result: `'we live in Sweden, its code is SE, my neighborhood is Södermalm`
 
 On this example, `.some_field`, inside the group will be affected by the filter `.address_components[types=country]`  (where the field gets its information), but `.vicinity` not, because it is on a different context (outside the group).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

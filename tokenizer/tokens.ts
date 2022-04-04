@@ -6,17 +6,17 @@ export const TOKENS = {
   SPACE: / /,
   GROUP: {
     START: /{/,
-    END: /}/,
+    END: /}/
   },
   FILTER: {
     START: /\[/,
     END: /\]/,
-    SEPARATION: /,/,
+    SEPARATION: /,/
   },
   SPACESHIP: {
     START: /</,
-    END: />/,
-  },
+    END: />/
+  }
 };
 
 export const TOKENS_COMPARISON = {
@@ -24,7 +24,7 @@ export const TOKENS_COMPARISON = {
   NOT: /!/,
   CONTAINS: /[~*]/,
   STARTS_OR_IS: /\|/,
-  ENDS_WITH: /\$/,
+  ENDS_WITH: /\$/
 };
 
 export const isEquals = (r: ReaderReadOnly): boolean =>

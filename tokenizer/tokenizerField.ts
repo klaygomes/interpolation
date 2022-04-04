@@ -9,7 +9,7 @@ export const tokenizerField: Tokenizer = <T>(reader: Reader, token: Token<T>) =>
   while (reader.read()) {
     const rules: Rule[] = [
       [isFilterStart, TokenName.FILTER, tokenizerFilter],
-      [isField, TokenName.FIELD, tokenizerField],
+      [isField, TokenName.FIELD, tokenizerField]
     ];
 
     digest(rules);

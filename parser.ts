@@ -12,7 +12,7 @@ export const parser = <T>(obj: TContext, token: Token<T>) => {
           il.push(() => ({
             raw: nextScope,
             text: String(nextScope),
-            ignore: false,
+            ignore: false
           }));
         }
         currentToken.context = nextScope;
@@ -24,14 +24,14 @@ export const parser = <T>(obj: TContext, token: Token<T>) => {
     [TokenName.SPACE]: () => {
       il.push(() => ({
         raw: ' ',
-        text: ' ',
+        text: ' '
       }));
     },
     [TokenName.TEXT]: (_, currentToken) => {
       il.push(() => ({
         raw: currentToken.value,
         text: String(currentToken.value),
-        ignore: !currentToken.value,
+        ignore: !Boolean(currentToken.value)
       }));
     },
     [TokenName.FILTER]: (scope, currentToken) => {
@@ -123,7 +123,7 @@ export const parser = <T>(obj: TContext, token: Token<T>) => {
     },
     [TokenName.NOT_EMPTY]: () => {
       throw new Error('Function not implemented.');
-    },
+    }
   };
   token.context = obj;
   grammar[token.token](obj, token);

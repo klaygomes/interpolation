@@ -22,7 +22,7 @@ export const Filters = {
   ENDS_WITH: (obj: any | any[], left: any, right: string) => {
     const item = [].concat(obj[left]);
     return Boolean(item.find(a => String(a).endsWith(right)));
-  },
+  }
 };
 
 const operations = [isNotEquals, isContains, isStartWith, isEndWith, isEquals];

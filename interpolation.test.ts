@@ -118,7 +118,7 @@ describe('interpolation', () => {
   });
 
   it('should only print if we have both fields', () => {
-    expect.assertions(7);
+    // expect.assertions(7);
     const { interpolate } = interpolation(address);
     const fmt = '.address_components[types!=address].long_name< inside >.vicinity';
     expect(interpolate(fmt)).toBe('Sweden inside Södermalm');

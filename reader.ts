@@ -36,5 +36,5 @@ export const reader = (stream: string | string[]) => ({
   },
   more(i = 0) {
     return this.i + i < stream.length;
-  },
+  }
 });

@@ -9,11 +9,11 @@ export const group = (args: ILToken[]): ILToken => () => {
   const ret: ILCode = {
     text: '',
     raw: '',
-    ignore: true,
+    ignore: true
   };
   return onlyValid.reduce((acc, cur) => ({
     text: acc.text! + cur.text,
     raw: acc.raw + cur.raw,
-    ignore: false,
+    ignore: false
   }), ret);
 };

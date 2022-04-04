@@ -14,7 +14,7 @@ export const tokenizer = <T>(reader: Reader, root?: Token<T>): Token<T> => {
   if (!givenRoot) {
     givenRoot = {
       token: TokenName.ROOT,
-      children: [],
+      children: []
     };
   }
   const { digest } = eater(reader, givenRoot);
@@ -25,7 +25,7 @@ export const tokenizer = <T>(reader: Reader, root?: Token<T>): Token<T> => {
       [isGroupStart, TokenName.GROUP, tokenizerGroup],
       [isSpaceshipStart, TokenName.SPACESHIP, tokenizerSpaceship],
       [isSpacer, TokenName.SPACE, tokenizerSpace],
-      [isText, TokenName.TEXT, tokenizerText],
+      [isText, TokenName.TEXT, tokenizerText]
     ];
     digest(rules);
   }

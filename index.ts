@@ -12,3 +12,6 @@ export const interpolation = (obj: Record<string, unknown>) => ({
     return interpret(il);
   },
 });
+
+export const interpolate = (obj: Record<string, unknown>, fmt: string | undefined) =>
+  interpolation(obj).interpolate(fmt);
