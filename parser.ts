@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-export */
 import { Token, TokenName, ILToken, ILCode, TGrammar, TContext } from './types';
 import { group } from './il';
 import { Filters } from './tokenizer/tokenizerFilter';
@@ -12,14 +13,14 @@ export const parser = <T>(obj: TContext, token: Token<T>) => {
           il.push(() => ({
             raw: nextScope,
             text: String(nextScope),
-            ignore: false
+            ignore: !Boolean(nextScope)
           }));
         }
         currentToken.context = nextScope;
+        //const fieldIL: ILToken[] = [];
         currentToken.children.forEach((c: Token<T>) => il.push(...parser(currentToken.context!, c)));
-      } else {
-        il.push(() => ({ ignore: true }));
-      };
+        //il.push((idx, arr) => group(fieldIL)(idx, arr));
+      }
     },
     [TokenName.SPACE]: () => {
       il.push(() => ({
@@ -35,8 +36,7 @@ export const parser = <T>(obj: TContext, token: Token<T>) => {
       }));
     },
     [TokenName.FILTER]: (scope, currentToken) => {
-      const emptyObject = {};
-      let givenScope = emptyObject;
+      let givenScope = {};
       const rawScope = Array.isArray(scope) ? scope : [scope];
       for (let x = 0; x < rawScope.length; x += 1) {
         const item = rawScope[x];
@@ -51,12 +51,10 @@ export const parser = <T>(obj: TContext, token: Token<T>) => {
           if (!match) { break; }
         }
         if (match) {
-          console.log('match', item);
           givenScope = item;
           break;
         }
       }
-      il.push(() => ({ givenScope, ignore: givenScope === emptyObject, text: '' }));
       currentToken.parent!.context = givenScope;
     },
     [TokenName.GROUP]: (scope, currentToken) => {
@@ -74,21 +72,15 @@ export const parser = <T>(obj: TContext, token: Token<T>) => {
         const nextIdx = idx + 1;
         const previousIL = arr[previousIdx];
         const nextIL = arr[nextIdx];
-        // TODO: Covert ILToken to (idx: Number, arr: ILToken[]) => Promise<ILCode>, to support lazy right to left recursive evaluations
+        // TODO: ILToken covert to (idx: Number, arr: ILToken[]) => Promise<ILCode>, to support lazy right to left recursive evaluations
         // today it does not support lazy right to left recursive evaluations
-        // example {text left< 1 >< 2 >< 3 >text right}
-        // it is not possible to evaluate 2 and 3, because it would end up in a infinite loop
-        // to avoid it, we must lazy evaluate the result of il code.
-        // this hack bellow was written to avoid endless loops
+        // example {text left< 1 >< 2 >< 3 >text right}, this hack bellow avoids endless loops
         let previous: ILCode = { ignore: true };// convert to promise
         let next: ILCode = { ignore: true }; // convert to promise
-
         arr[previousIdx] = () => previous;
         arr[nextIdx] = () => next;
-
-        previous = typeof previousIL === 'function' ? previousIL(previousIdx, arr) : { ignore: false };
-        next = typeof nextIL === 'function' ? nextIL(nextIdx, arr) : { ignore: false };
-
+        previous = typeof previousIL === 'function' ? previousIL(previousIdx, arr) : { ignore: true };
+        next = typeof nextIL === 'function' ? nextIL(nextIdx, arr) : { ignore: true };
         if (!previous?.ignore && !next?.ignore) {
           return group(spaceShipIL)(idx, arr);
         }

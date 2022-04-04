@@ -118,7 +118,7 @@ describe('interpolation', () => {
   });
 
   it('should only print if we have both fields', () => {
-    // expect.assertions(7);
+    expect.assertions(7);
     const { interpolate } = interpolation(address);
     const fmt = '.address_components[types!=address].long_name< inside >.vicinity';
     expect(interpolate(fmt)).toBe('Sweden inside Södermalm');
@@ -181,15 +181,13 @@ describe('interpolation', () => {
   });
 
   it('text + spaceship + text', () => {
-    expect.assertions(3);
+    expect.assertions(2);
     const { interpolate } = interpolation(address);
-    const fmt = '{{[utc_offset=121] \\.vicinity por que?}<1> text left< 1 >< 2 >< 3 >.vicinity}';
-    expect(interpolate(fmt)).toBe(' \\.vicinity por que?1 text leftSödermalm'); // catch endless loops
+    const fmt = '{text left< 1 >< 2 >< 3 >.vicinity}';
+    expect(interpolate(fmt)).toBe('text leftSödermalm'); // catch endless loops
     // expected result when lazy evaluation implemented
     // expect(interpolate(fmt)).toBe('text lef 1  2  3 tSödermalm');
     const fmt2 = '{{}{<{1<2>}>{}}}';
-    expect(interpolate(fmt2)).toBe('12');
-    const fmt3 = '.address_components[types=country][short_name==GB]<.address_components[types=postal_code].short_name>';
-    expect(interpolate(fmt3)).toBe('');
+    expect(interpolate(fmt2)).toBe('');
   });
 });

@@ -31,3 +31,4 @@ export const eater = <T>(reader: Reader, token: Token<T>) => {
     digest
   };
 };
+// eater.breaker = (cond) => [(r: Reader) => cond(r), TokenName.NOOP, () => ({})];
