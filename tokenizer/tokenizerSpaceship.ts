@@ -16,7 +16,7 @@ export const tokenizerSpaceship: Tokenizer = <T>(reader: Reader, token: Token<T>
       [isGroupStart, TokenName.GROUP, tokenizerGroup],
       [isSpaceshipStart, TokenName.SPACESHIP, tokenizerSpaceship],
       [isSpacer, TokenName.SPACE, tokenizerSpace],
-      [isText, TokenName.TEXT, tokenizerText]
+      [isText, TokenName.TEXT, tokenizerText],
     ];
     digest(rules);
     if (isGroupEnd(reader)) {
