@@ -4,7 +4,7 @@ import { parser } from './parser';
 import { interpret } from './il';
 
 export const interpolation = (obj: Record<string, unknown>) => ({
-  interpolate(fmt: string | undefined) {
+  interpolate(fmt?: string ) {
     if (!fmt) return '';
     const r = reader(fmt);
     const t = tokenizer(r);
