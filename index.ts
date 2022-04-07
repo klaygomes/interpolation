@@ -13,5 +13,5 @@ export const interpolation = (obj: Record<string, unknown>) => ({
   },
 });
 
-export const interpolate = (obj: Record<string, unknown>, fmt: string | undefined) =>
+export const interpolate = (obj: Record<string, unknown>, fmt?: string) =>
   interpolation(obj).interpolate(fmt);
