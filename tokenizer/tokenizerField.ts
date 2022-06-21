@@ -1,6 +1,6 @@
 import { Tokenizer, Reader, Token, TokenName, Rule } from '../types';
 import { eater } from './util';
-import { isFilterStart, isField, isSpacer, isGroupEnd, isSpaceship } from './tokens';
+import { isFilterStart, isField, isSpacer, isGroupEnd, isSpaceship, isOR } from './tokens';
 
 import { tokenizerFilter } from './tokenizerFilter';
 
@@ -13,7 +13,7 @@ export const tokenizerField: Tokenizer = <T>(reader: Reader, token: Token<T>) =>
     ];
 
     digest(rules);
-    if (isSpacer(reader) || isGroupEnd(reader) || isSpaceship(reader)) {
+    if (isSpacer(reader) || isGroupEnd(reader) || isSpaceship(reader) || isOR(reader)) {
       break;
     }
     reader.fragmentUpdate();

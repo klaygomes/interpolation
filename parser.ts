@@ -64,6 +64,21 @@ export const parser = <T>(obj: TContext, token: Token<T>) => {
       currentToken.children.forEach(c => groupIL.push(...parser(currentToken.context!, c)));
       il.push((idx, arr) => group(groupIL)(idx, arr));
     },
+    [TokenName.OR]: () => {
+      il.push((idx, arr) => {
+        const previousIL = arr[idx - 1];
+        const previous = previousIL(idx - 1, arr);
+        if (!previous?.ignore) {
+          while (true) {
+            // eslint-disable-next-line no-plusplus, no-param-reassign
+            const next = arr[++idx](idx, arr);
+            arr[idx] = () => ({ ignore: true });
+            if (!('givenScope' in next)) { break; }
+          }
+        }
+        return ({ ignore: false, text: '' });
+      });
+    },
     [TokenName.SPACESHIP]: (scope, currentToken) => {
       currentToken.context = scope;
       const spaceShipIL: ILToken[] = [];

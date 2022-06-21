@@ -192,4 +192,12 @@ describe('interpolation', () => {
     const fmt3 = '.address_components[types=country][short_name==GB]<.address_components[types=postal_code].short_name>';
     expect(interpolate(fmt3)).toBe('');
   });
+  it('or', () => {
+    expect.assertions(2);
+    const { interpolate } = interpolation(address);
+    const fmt = '{[utc_offset=120].vicinity}|.utc_offset';
+    expect(interpolate(fmt)).toBe('Södermalm');
+    const fmt2 = '{[utc_offset=110].vicinity}|.utc_offset';
+    expect(interpolate(fmt2)).toBe('120');
+  });
 });

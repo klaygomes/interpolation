@@ -13,6 +13,7 @@ export const TOKENS = {
     END: /\]/,
     SEPARATION: /,/,
   },
+  OR: /\|/,
   SPACESHIP: {
     START: /</,
     END: />/,
@@ -101,10 +102,15 @@ export const isSpacer = (r: ReaderReadOnly): boolean =>
   TOKENS.SPACE.test(r.look()) &&
   TOKENS.ESCAPE.test(r.lookBack());
 
+export const isOR = (r: ReaderReadOnly): boolean =>
+  TOKENS.OR.test(r.look()) &&
+  TOKENS.ESCAPE.test(r.lookBack());
+
 export const isText = (r: ReaderReadOnly): boolean =>
   !isFilter(r) &&
   !isGroup(r) &&
   !isField(r) &&
   !isSpaceship(r) &&
   !isSpacer(r) &&
+  !isOR(r) &&
   Boolean(r.look());

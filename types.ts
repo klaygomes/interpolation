@@ -34,18 +34,19 @@ export enum TokenName {
   FILTER_EXPRESSION = 'FILTER_EXPRESSION',
   NOT_EMPTY = 'NOT_EMPTY',
   SPACESHIP = 'SPACESHIP',
+  OR = 'OR',
 }
 
-export type Token<T> = {
+export type Token = {
   token: TokenName,
   value?: string,
-  parent?: Token<any>,
-  children: Token<any>[],
+  parent?: Token,
+  children: Token[],
   ignore?: boolean,
   context?: TContext
 };
 
-export type Tokenizer = <T>(reader: Reader, token: Token<T>) => void;
+export type Tokenizer = (reader: Reader, token: Token) => void;
 
 export type Rule = [(r: ReaderReadOnly) => boolean, TokenName, Tokenizer];
 
