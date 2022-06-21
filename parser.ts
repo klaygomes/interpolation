@@ -2,7 +2,7 @@ import { Token, TokenName, ILToken, ILCode, TGrammar, TContext } from './types';
 import { group } from './il';
 import { Filters } from './tokenizer/tokenizerFilter';
 
-export const parser = <T>(obj: TContext, token: Token<T>) => {
+export const parser = (obj: TContext, token: Token) => {
   const il: ILToken[] = [];
   const grammar: TGrammar = {
     [TokenName.FIELD]: (scope, currentToken) => {
@@ -16,7 +16,7 @@ export const parser = <T>(obj: TContext, token: Token<T>) => {
           }));
         }
         currentToken.context = nextScope;
-        currentToken.children.forEach((c: Token<T>) => il.push(...parser(currentToken.context!, c)));
+        currentToken.children.forEach((c: Token) => il.push(...parser(currentToken.context!, c)));
       } else {
         il.push(() => ({ ignore: true }));
       }
@@ -69,6 +69,7 @@ export const parser = <T>(obj: TContext, token: Token<T>) => {
         const previousIL = arr[idx - 1];
         const previous = previousIL(idx - 1, arr);
         if (!previous?.ignore) {
+          // eslint-disable-next-line no-constant-condition
           while (true) {
             // eslint-disable-next-line no-plusplus, no-param-reassign
             const next = arr[++idx](idx, arr);
@@ -110,7 +111,7 @@ export const parser = <T>(obj: TContext, token: Token<T>) => {
       });
     },
     [TokenName.ROOT]: (_, currentToken) => {
-      token.children.forEach(c => il.push(...parser(currentToken.context!, c)));
+      token.children.forEach((c: any) => il.push(...parser(currentToken.context!, c)));
     },
     [TokenName.RIGHT_OPERAND]: () => {
       throw new Error('Function not implemented.');
