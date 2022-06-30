@@ -12,7 +12,7 @@ export const parser = (obj: TContext, token: Token) => {
           il.push(() => ({
             raw: nextScope,
             text: String(nextScope),
-            ignore: false,
+            ignore: String(nextScope).trim() === '',
           }));
         }
         currentToken.context = nextScope;
@@ -31,7 +31,7 @@ export const parser = (obj: TContext, token: Token) => {
       il.push(() => ({
         raw: currentToken.value,
         text: String(currentToken.value),
-        ignore: !currentToken.value,
+        ignore: String(currentToken.value).trim() === '',
       }));
     },
     [TokenName.FILTER]: (scope, currentToken) => {

@@ -200,4 +200,18 @@ describe('interpolation', () => {
     const fmt2 = '{[utc_offset=110].vicinity}|.utc_offset';
     expect(interpolate(fmt2)).toBe('120');
   });
+  it('no unwanted spaces', () => {
+    expect.hasAssertions();
+    const { interpolate } = interpolation({ street_address: '', region: '' });
+    const fmt = '.street_address2<, >.street_address<, >.city<, >{.region< >.postal_code}';
+    expect(interpolate(fmt)).toBe('');
+  });
+  // data mapping bugs
+  it('U Jezera 767/', () => {
+    expect.hasAssertions();
+    const data = require('./fixtures/google-u-jezera-767.cz.json');
+    const { interpolate } = interpolation(data.result);
+    const fmt = '.address_components[types=route].short_name< >{.address_components[types=premise].short_name</>.address_components[types=street_number].short_name}';
+    expect(interpolate(fmt)).toBe('U Jezera 767, 281 51 Velký Osek');
+  });
 });

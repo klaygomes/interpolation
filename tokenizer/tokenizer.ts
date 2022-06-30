@@ -10,7 +10,7 @@ import { tokenizerSpace } from './tokenizerSpace';
 import { tokenizerSpaceship } from './tokenizerSpaceship';
 import { tokenizerOr } from './tokenizerOr';
 
-export const tokenizer = <T>(reader: Reader, root?: Token<T>): Token<T> => {
+export const tokenizer = (reader: Reader, root?: Token): Token => {
   let givenRoot = root;
   if (!givenRoot) {
     givenRoot = {

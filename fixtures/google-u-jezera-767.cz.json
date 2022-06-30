@@ -1,0 +1,95 @@
+{
+  "html_attributions": [],
+  "result": {
+    "address_components": [
+      {
+        "long_name": "767",
+        "short_name": "767",
+        "types": [
+          "premise"
+        ]
+      },
+      {
+        "long_name": "U Jezera",
+        "short_name": "U Jezera",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Velký Osek",
+        "short_name": "Velký Osek",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Kolín",
+        "short_name": "Kolín",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Středočeský kraj",
+        "short_name": "Středočeský kraj",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Czechia",
+        "short_name": "CZ",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "281 51",
+        "short_name": "281 51",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "adr_address": "\u003cspan class=\"street-address\"\u003eU Jezera 767\u003c/span\u003e, \u003cspan class=\"postal-code\"\u003e281 51\u003c/span\u003e \u003cspan class=\"locality\"\u003eVelký Osek\u003c/span\u003e, \u003cspan class=\"country-name\"\u003eCzechia\u003c/span\u003e",
+    "formatted_address": "U Jezera 767, 281 51 Velký Osek, Czechia",
+    "geometry": {
+      "location": {
+        "lat": 50.0946059,
+        "lng": 15.1818954
+      },
+      "viewport": {
+        "northeast": {
+          "lat": 50.0960112802915,
+          "lng": 15.1832458302915
+        },
+        "southwest": {
+          "lat": 50.0933133197085,
+          "lng": 15.1805478697085
+        }
+      }
+    },
+    "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/geocode-71.png",
+    "icon_background_color": "#7B9EB0",
+    "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+    "name": "767",
+    "place_id": "ChIJq9jUywMUDEcReBI3h_0fG_U",
+    "plus_code": {
+      "compound_code": "35VJ+RQ Velký Osek, Czechia",
+      "global_code": "9F2Q35VJ+RQ"
+    },
+    "reference": "ChIJq9jUywMUDEcReBI3h_0fG_U",
+    "types": [
+      "street_address"
+    ],
+    "url": "https://maps.google.com/?q=767&ftid=0x470c1403cbd4d8ab:0xf51b1ffd87371278",
+    "utc_offset": 120,
+    "vicinity": "Velký Osek"
+  },
+  "status": "OK"
+}

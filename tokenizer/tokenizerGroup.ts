@@ -1,5 +1,5 @@
 import { Tokenizer, Token, Reader, TokenName, Rule } from '../types';
-import { isFilterStart, isField, isGroupStart, isText, isSpacer, isGroupEnd, isSpaceshipEnd, isSpaceshipStart } from './tokens';
+import { isFilterStart, isField, isGroupStart, isText, isSpacer, isGroupEnd, isSpaceshipStart } from './tokens';
 import { eater } from './util';
 import { tokenizerText } from './tokenizerText';
 import { tokenizerField } from './tokenizerField';
@@ -8,7 +8,7 @@ import { tokenizerFilter } from './tokenizerFilter';
 import { tokenizerSpace } from './tokenizerSpace';
 
 
-export const tokenizerGroup: Tokenizer = <T>(reader: Reader, token: Token<T>) => {
+export const tokenizerGroup: Tokenizer = (reader: Reader, token: Token) => {
   const { digest } = eater(reader, token);
   while (reader.read()) {
     const rules: Rule[] = [
@@ -21,9 +21,6 @@ export const tokenizerGroup: Tokenizer = <T>(reader: Reader, token: Token<T>) =>
     ];
     digest(rules);
     if (isGroupEnd(reader)) {
-      break;
-    }
-    if (isSpaceshipEnd(reader)) {
       break;
     }
   }
