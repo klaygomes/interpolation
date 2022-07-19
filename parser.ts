@@ -27,14 +27,14 @@ export const parser = (obj: TContext, token: Token) => {
         text: ' ',
       }));
     },
-    [TokenName.TEXT]: (_, currentToken) => {
+    [TokenName.TEXT]: (_, currentToken: Token) => {
       il.push(() => ({
         raw: currentToken.value,
         text: String(currentToken.value),
         ignore: String(currentToken.value).trim() === '',
       }));
     },
-    [TokenName.FILTER]: (scope, currentToken) => {
+    [TokenName.FILTER]: (scope, currentToken: Token) => {
       const emptyObject = {};
       let givenScope = emptyObject;
       const rawScope = Array.isArray(scope) ? scope : [scope];
@@ -58,7 +58,7 @@ export const parser = (obj: TContext, token: Token) => {
       il.push(() => ({ givenScope, ignore: givenScope === emptyObject, text: '' }));
       currentToken.parent!.context = givenScope;
     },
-    [TokenName.GROUP]: (scope, currentToken) => {
+    [TokenName.GROUP]: (scope, currentToken: Token) => {
       currentToken.context = scope;
       const groupIL: ILToken[] = [];
       currentToken.children.forEach(c => groupIL.push(...parser(currentToken.context!, c)));
@@ -69,18 +69,18 @@ export const parser = (obj: TContext, token: Token) => {
         const previousIL = arr[idx - 1];
         const previous = previousIL(idx - 1, arr);
         if (!previous?.ignore) {
-          // eslint-disable-next-line no-constant-condition
-          while (true) {
-            // eslint-disable-next-line no-plusplus, no-param-reassign
-            const next = arr[++idx](idx, arr);
+          let next: ILCode;
+          do {
+            // eslint-disable-next-line no-param-reassign
+            idx += 1;
+            next = arr[idx](idx, arr);
             arr[idx] = () => ({ ignore: true });
-            if (!('givenScope' in next)) { break; }
-          }
+          } while ('givenScope' in next);
         }
         return ({ ignore: false, text: '' });
       });
     },
-    [TokenName.SPACESHIP]: (scope, currentToken) => {
+    [TokenName.SPACESHIP]: (scope, currentToken: Token) => {
       currentToken.context = scope;
       const spaceShipIL: ILToken[] = [];
       currentToken.children.forEach(c => spaceShipIL.push(...parser(currentToken.context!, c)));
@@ -110,8 +110,8 @@ export const parser = (obj: TContext, token: Token) => {
         return ({ ignore: true });
       });
     },
-    [TokenName.ROOT]: (_, currentToken) => {
-      token.children.forEach((c: any) => il.push(...parser(currentToken.context!, c)));
+    [TokenName.ROOT]: (_, currentToken: Token) => {
+      token.children.forEach(c => il.push(...parser(currentToken.context!, c)));
     },
     [TokenName.RIGHT_OPERAND]: () => {
       throw new Error('Function not implemented.');
