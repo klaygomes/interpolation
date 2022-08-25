@@ -1,4 +1,5 @@
-import { interpolation } from '.'
+import { describe, expect, it } from 'vitest'
+import { interpolation } from './index'
 import address from './fixtures/google-stadsgardshamnen22.se.json'
 
 describe('interpolation', () => {
