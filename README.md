@@ -111,18 +111,18 @@ So, to get the `route` value, `Stadsgårdshamnen`, you only need to write:
 You can also write, more complex queries, like:
 
 ```
-{[vicinity=Kungsholmen].address_components[types=route].short_name}
+{[vicinity=Södermalm].address_components[types=route].short_name}
 ```
-result: `''`
+result: `'Stadsgårdshamnen'`
 
-Where it will only print the `route` short name if `vicinity` is equals to `Kungsholmen`.
+Where it will only print the `route` short name if `vicinity` is equals to `Södermalm`.
 
 The same expression, but written using vanilla JavaScript:
 ```javascript
 
-const isKungsholmen = address.vicinity === 'Kungsholmen';
+const isSodermalm = address.vicinity === 'Södermalm';
 
-const result = isKungsholmen ?
+const result = isSodermalm ?
   address
   .address_components
   .find(a => a.types.includes('route'))?.short_name ?? '' : '';
