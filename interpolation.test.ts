@@ -1,5 +1,3 @@
-/* eslint-disable jest/no-disabled-tests */
-/* eslint-disable global-require */
 import { interpolation } from '.'
 import address from './fixtures/google-stadsgardshamnen22.se.json'
 

@@ -1,4 +1,3 @@
-/* eslint-disable no-plusplus */
 export const reader = (stream: string | string[]) => ({
   i: 0,
   frag: '',

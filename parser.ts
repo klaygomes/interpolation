@@ -6,6 +6,8 @@ export const parser = (obj: TContext, token: Token) => {
   const il: ILToken[] = []
   const grammar: TGrammar = {
     [TokenName.FIELD]: (scope, currentToken) => {
+      // TODO: please remove the eslint-disable in the file and address the non-null-assertion
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const nextScope = scope[currentToken.value!] as TContext
       if (nextScope) {
         if (!currentToken.children.length) {
@@ -16,6 +18,8 @@ export const parser = (obj: TContext, token: Token) => {
           }))
         }
         currentToken.context = nextScope
+        // TODO: please remove the eslint-disable in the file and address the non-null-assertion
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         currentToken.children.forEach((c: Token) => il.push(...parser(currentToken.context!, c)))
       } else {
         il.push(() => ({ ignore: true }))
@@ -46,6 +50,8 @@ export const parser = (obj: TContext, token: Token) => {
           if (rightOperand) {
             match = (Filters as any)[operation.token](item, leftOperand.value, rightOperand.value)
           } else {
+            // TODO: please remove the eslint-disable in the file and address the non-null-assertion
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             match = Boolean(item[leftOperand.value!])
           }
           if (!match) {
@@ -58,11 +64,15 @@ export const parser = (obj: TContext, token: Token) => {
         }
       }
       il.push(() => ({ givenScope, ignore: givenScope === emptyObject, text: '' }))
+      // TODO: please remove the eslint-disable in the file and address the non-null-assertion
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       currentToken.parent!.context = givenScope
     },
     [TokenName.GROUP]: (scope, currentToken: Token) => {
       currentToken.context = scope
       const groupIL: ILToken[] = []
+      // TODO: please remove the eslint-disable in the file and address the non-null-assertion
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       currentToken.children.forEach((c) => groupIL.push(...parser(currentToken.context!, c)))
       il.push((idx, arr) => group(groupIL)(idx, arr))
     },
@@ -73,7 +83,6 @@ export const parser = (obj: TContext, token: Token) => {
         if (!previous?.ignore) {
           let next: ILCode
           do {
-            // eslint-disable-next-line no-param-reassign
             idx += 1
             next = arr[idx](idx, arr)
             arr[idx] = () => ({ ignore: true })
@@ -85,6 +94,8 @@ export const parser = (obj: TContext, token: Token) => {
     [TokenName.SPACESHIP]: (scope, currentToken: Token) => {
       currentToken.context = scope
       const spaceShipIL: ILToken[] = []
+      // TODO: please remove the eslint-disable in the file and address the non-null-assertion
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       currentToken.children.forEach((c) => spaceShipIL.push(...parser(currentToken.context!, c)))
       il.push((idx, arr) => {
         const previousIdx = idx - 1
@@ -114,6 +125,8 @@ export const parser = (obj: TContext, token: Token) => {
       })
     },
     [TokenName.ROOT]: (_, currentToken: Token) => {
+      // TODO: please remove the eslint-disable in the file and address the non-null-assertion
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       token.children.forEach((c) => il.push(...parser(currentToken.context!, c)))
     },
     [TokenName.RIGHT_OPERAND]: () => {
