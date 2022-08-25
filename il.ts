@@ -19,6 +19,8 @@ export const group =
     }
     return onlyValid.reduce(
       (acc, cur) => ({
+        // TODO: please remove the eslint-disable in the file and address the non-null-assertion
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         text: acc.text! + cur.text,
         raw: acc.raw + cur.raw,
         ignore: false,
