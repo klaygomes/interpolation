@@ -3,7 +3,7 @@ import { format } from '../src'
 
 const data = { a: 'A', 'first-name': 'Jo' }
 
-describe.skip('escapes', () => {
+describe('escapes', () => {
   it.each([
     ['\\.not_a_field', '.not_a_field'],
     ['\\{\\.a\\}', '{.a}'],

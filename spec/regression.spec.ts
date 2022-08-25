@@ -68,7 +68,7 @@ const cases: [string, string, string][] = [
   ['falls back when the first option is empty', '{[utc_offset=110].vicinity}|.utc_offset', '120'],
 ]
 
-describe.skip('regression', () => {
+describe('regression', () => {
   it.each(cases)('%s', (_, template, expected) => {
     expect(format(template, place)).toBe(expected)
   })

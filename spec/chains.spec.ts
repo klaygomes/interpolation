@@ -3,7 +3,7 @@ import { format } from '../src'
 
 const template = '.street< >.number<, >.city'
 
-describe.skip('chains', () => {
+describe('chains', () => {
   it.each([
     [{ street: 'Main', number: 22, city: 'Sthlm' }, 'Main 22, Sthlm'],
     [{ street: 'Main', city: 'Sthlm' }, 'Main, Sthlm'],

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { format } from '../src'
 
-describe.skip('fallbacks', () => {
+describe('fallbacks', () => {
   it.each([
     ['.nick|.first', { nick: 'Al', first: 'Alan' }, 'Al'],
     ['.nick|.first', { first: 'Alan' }, 'Alan'],

@@ -11,7 +11,7 @@ const syntaxError = (template: string) => {
   throw new Error(`expected ${JSON.stringify(template)} to be rejected`)
 }
 
-describe.skip('syntax errors', () => {
+describe('syntax errors', () => {
   it.each([
     ['.a<, >{.b<, >.c', 'unclosed group', 6],
     ['{a}}', "unexpected '}'", 3],

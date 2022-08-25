@@ -3,7 +3,7 @@ import { format } from '../src'
 
 const data = { city: 'stockholm city', loud: 'LOUD', pad: '  x  ', street: 'main', number: 22 }
 
-describe.skip('modifiers', () => {
+describe('modifiers', () => {
   it.each([
     ['.city:upper', 'STOCKHOLM CITY'],
     ['.loud:lower', 'loud'],

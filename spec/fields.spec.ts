@@ -23,7 +23,7 @@ const data = {
   42: 'numeric key',
 }
 
-describe.skip('fields', () => {
+describe('fields', () => {
   it.each([
     ['.city', 'Stockholm'],
     ['.city, .country', 'Stockholm, Sweden'],

@@ -13,7 +13,7 @@ const data = {
   ],
 }
 
-describe.skip('groups', () => {
+describe('groups', () => {
   it.each([
     ['{Tel: .phone}<, >.email', data, 'Tel: 555, a@b'],
     ['{Tel: .phone}<, >.email', { email: 'a@b' }, 'a@b'],

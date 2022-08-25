@@ -12,7 +12,7 @@ const data = {
   offset: 120,
 }
 
-describe.skip('filters', () => {
+describe('filters', () => {
   it.each([
     ['.parts[kind=street].value', 'Main St'],
     ['.parts[kind!=street].value', 'Stockholms län'],

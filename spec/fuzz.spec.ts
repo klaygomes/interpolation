@@ -17,7 +17,7 @@ const json = fc.letrec((tie) => ({
   ),
 })).value
 
-describe.skip('fuzz', () => {
+describe('fuzz', () => {
   it('only ever throws InterpolationSyntaxError while parsing', () => {
     fc.assert(
       fc.property(template, (input) => {
