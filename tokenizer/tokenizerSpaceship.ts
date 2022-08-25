@@ -1,15 +1,24 @@
-import { Tokenizer, Token, Reader, TokenName, Rule } from '../types';
-import { isFilterStart, isField, isGroupStart, isText, isSpacer, isOR, isSpaceshipEnd, isSpaceshipStart } from './tokens';
-import { eater } from './util';
-import { tokenizerText } from './tokenizerText';
-import { tokenizerField } from './tokenizerField';
-import { tokenizerGroup } from './tokenizerGroup';
-import { tokenizerFilter } from './tokenizerFilter';
-import { tokenizerSpace } from './tokenizerSpace';
-import { tokenizerOr } from './tokenizerOr';
+import { Tokenizer, Token, Reader, TokenName, Rule } from '../types'
+import {
+  isFilterStart,
+  isField,
+  isGroupStart,
+  isText,
+  isSpacer,
+  isOR,
+  isSpaceshipEnd,
+  isSpaceshipStart,
+} from './tokens'
+import { eater } from './util'
+import { tokenizerText } from './tokenizerText'
+import { tokenizerField } from './tokenizerField'
+import { tokenizerGroup } from './tokenizerGroup'
+import { tokenizerFilter } from './tokenizerFilter'
+import { tokenizerSpace } from './tokenizerSpace'
+import { tokenizerOr } from './tokenizerOr'
 
 export const tokenizerSpaceship: Tokenizer = <T>(reader: Reader, token: Token<T>) => {
-  const { digest } = eater(reader, token);
+  const { digest } = eater(reader, token)
   while (reader.read()) {
     const rules: Rule[] = [
       [isFilterStart, TokenName.FILTER, tokenizerFilter],
@@ -19,10 +28,10 @@ export const tokenizerSpaceship: Tokenizer = <T>(reader: Reader, token: Token<T>
       [isSpacer, TokenName.SPACE, tokenizerSpace],
       [isText, TokenName.TEXT, tokenizerText],
       [isOR, TokenName.OR, tokenizerOr],
-    ];
-    digest(rules);
+    ]
+    digest(rules)
     if (isSpaceshipEnd(reader)) {
-      break;
+      break
     }
   }
-};
+}

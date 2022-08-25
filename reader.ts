@@ -4,37 +4,37 @@ export const reader = (stream: string | string[]) => ({
   frag: '',
   ignore: false,
   read() {
-    this.ignore = false;
-    return stream[this.i++];
+    this.ignore = false
+    return stream[this.i++]
   },
   fragment(frag?: string) {
-    if (frag) this.frag = frag;
-    return this.frag;
+    if (frag) this.frag = frag
+    return this.frag
   },
   fragmentUpdate() {
-    if (!this.ignore) this.frag += this.look();
+    if (!this.ignore) this.frag += this.look()
   },
   fragmentClear() {
-    this.frag = '';
+    this.frag = ''
   },
   ignoreCurrentChar() {
-    this.ignore = true;
+    this.ignore = true
   },
   look() {
-    return stream[this.i - 1] || '';
+    return stream[this.i - 1] || ''
   },
   forward() {
-    this.read();
+    this.read()
   },
   lookAhead(i = 0) {
-    const ahead = this.i + i;
-    return stream[ahead];
+    const ahead = this.i + i
+    return stream[ahead]
   },
   lookBack(i = 2) {
-    const back = this.i - i;
-    return stream[back];
+    const back = this.i - i
+    return stream[back]
   },
   more(i = 0) {
-    return this.i + i < stream.length;
+    return this.i + i < stream.length
   },
-});
+})

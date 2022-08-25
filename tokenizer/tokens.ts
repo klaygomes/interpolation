@@ -1,4 +1,4 @@
-import { ReaderReadOnly } from '../types';
+import { ReaderReadOnly } from '../types'
 
 export const TOKENS = {
   FIELD: /\./,
@@ -18,7 +18,7 @@ export const TOKENS = {
     START: /</,
     END: />/,
   },
-};
+}
 
 export const TOKENS_COMPARISON = {
   EQUALS: /=/,
@@ -26,30 +26,27 @@ export const TOKENS_COMPARISON = {
   CONTAINS: /[~*]/,
   STARTS_OR_IS: /\|/,
   ENDS_WITH: /\$/,
-};
+}
 
-export const isEquals = (r: ReaderReadOnly): boolean =>
-  TOKENS_COMPARISON.EQUALS.test(r.look());
+export const isEquals = (r: ReaderReadOnly): boolean => TOKENS_COMPARISON.EQUALS.test(r.look())
 
 export const isNotEquals = (r: ReaderReadOnly): boolean =>
-  TOKENS_COMPARISON.NOT.test(r.look()) &&
-  r.more() &&
-  TOKENS_COMPARISON.EQUALS.test(r.lookAhead());
+  TOKENS_COMPARISON.NOT.test(r.look()) && r.more() && TOKENS_COMPARISON.EQUALS.test(r.lookAhead())
 
 export const isContains = (r: ReaderReadOnly): boolean =>
   TOKENS_COMPARISON.CONTAINS.test(r.look()) &&
   r.more() &&
-  TOKENS_COMPARISON.EQUALS.test(r.lookAhead());
+  TOKENS_COMPARISON.EQUALS.test(r.lookAhead())
 
 export const isStartWith = (r: ReaderReadOnly): boolean =>
   TOKENS_COMPARISON.STARTS_OR_IS.test(r.look()) &&
   r.more() &&
-  TOKENS_COMPARISON.EQUALS.test(r.lookAhead());
+  TOKENS_COMPARISON.EQUALS.test(r.lookAhead())
 
 export const isEndWith = (r: ReaderReadOnly): boolean =>
   TOKENS_COMPARISON.ENDS_WITH.test(r.look()) &&
   r.more() &&
-  TOKENS_COMPARISON.EQUALS.test(r.lookAhead());
+  TOKENS_COMPARISON.EQUALS.test(r.lookAhead())
 
 export const isField = (r: ReaderReadOnly): boolean =>
   TOKENS.FIELD.test(r.look()) &&
@@ -60,51 +57,40 @@ export const isField = (r: ReaderReadOnly): boolean =>
   !TOKENS.GROUP.START.test(r.lookAhead()) &&
   !TOKENS.GROUP.END.test(r.lookAhead()) &&
   !TOKENS.SPACESHIP.START.test(r.lookAhead()) &&
-  !TOKENS.SPACESHIP.END.test(r.lookAhead());
+  !TOKENS.SPACESHIP.END.test(r.lookAhead())
 
 export const isGroupStart = (r: ReaderReadOnly): boolean =>
-  TOKENS.GROUP.START.test(r.look()) &&
-  TOKENS.ESCAPE.test(r.lookBack()) &&
-  r.more();
+  TOKENS.GROUP.START.test(r.look()) && TOKENS.ESCAPE.test(r.lookBack()) && r.more()
 
 export const isGroupEnd = (r: ReaderReadOnly): boolean =>
-  TOKENS.GROUP.END.test(r.look()) &&
-  TOKENS.ESCAPE.test(r.lookBack());
+  TOKENS.GROUP.END.test(r.look()) && TOKENS.ESCAPE.test(r.lookBack())
 
-export const isGroup = (r: ReaderReadOnly) => isGroupStart(r) || isGroupEnd(r);
+export const isGroup = (r: ReaderReadOnly) => isGroupStart(r) || isGroupEnd(r)
 
 export const isSpaceshipStart = (r: ReaderReadOnly): boolean =>
-  TOKENS.SPACESHIP.START.test(r.look()) &&
-  TOKENS.ESCAPE.test(r.lookBack()) &&
-  r.more();
+  TOKENS.SPACESHIP.START.test(r.look()) && TOKENS.ESCAPE.test(r.lookBack()) && r.more()
 
 export const isSpaceshipEnd = (r: ReaderReadOnly): boolean =>
-  TOKENS.SPACESHIP.END.test(r.look()) &&
-  TOKENS.ESCAPE.test(r.lookBack());
+  TOKENS.SPACESHIP.END.test(r.look()) && TOKENS.ESCAPE.test(r.lookBack())
 
-export const isSpaceship = (r: ReaderReadOnly) => isSpaceshipStart(r) || isSpaceshipEnd(r);
+export const isSpaceship = (r: ReaderReadOnly) => isSpaceshipStart(r) || isSpaceshipEnd(r)
 
 export const isFilterStart = (r: ReaderReadOnly): boolean =>
-  TOKENS.FILTER.START.test(r.look()) &&
-  TOKENS.ESCAPE.test(r.lookBack());
+  TOKENS.FILTER.START.test(r.look()) && TOKENS.ESCAPE.test(r.lookBack())
 
 export const isFilterEnd = (r: ReaderReadOnly): boolean =>
-  TOKENS.FILTER.END.test(r.look()) &&
-  TOKENS.ESCAPE.test(r.lookBack());
+  TOKENS.FILTER.END.test(r.look()) && TOKENS.ESCAPE.test(r.lookBack())
 
 export const isFilterSep = (r: ReaderReadOnly) =>
-  TOKENS.FILTER.SEPARATION.test(r.look()) &&
-  TOKENS.ESCAPE.test(r.lookBack());
+  TOKENS.FILTER.SEPARATION.test(r.look()) && TOKENS.ESCAPE.test(r.lookBack())
 
-export const isFilter = (r: ReaderReadOnly) => isFilterStart(r) || isFilterEnd(r);
+export const isFilter = (r: ReaderReadOnly) => isFilterStart(r) || isFilterEnd(r)
 
 export const isSpacer = (r: ReaderReadOnly): boolean =>
-  TOKENS.SPACE.test(r.look()) &&
-  TOKENS.ESCAPE.test(r.lookBack());
+  TOKENS.SPACE.test(r.look()) && TOKENS.ESCAPE.test(r.lookBack())
 
 export const isOR = (r: ReaderReadOnly): boolean =>
-  TOKENS.OR.test(r.look()) &&
-  TOKENS.ESCAPE.test(r.lookBack());
+  TOKENS.OR.test(r.look()) && TOKENS.ESCAPE.test(r.lookBack())
 
 export const isText = (r: ReaderReadOnly): boolean =>
   !isFilter(r) &&
@@ -113,4 +99,4 @@ export const isText = (r: ReaderReadOnly): boolean =>
   !isSpaceship(r) &&
   !isSpacer(r) &&
   !isOR(r) &&
-  Boolean(r.look());
+  Boolean(r.look())

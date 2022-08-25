@@ -1,21 +1,20 @@
-import { reader } from './reader';
+import { reader } from './reader'
 
-export type Reader = ReturnType<typeof reader>;
-export type ReaderReadOnly = Pick<Reader, 'look' | 'lookAhead' | 'lookBack' | 'more'>;
+export type Reader = ReturnType<typeof reader>
+export type ReaderReadOnly = Pick<Reader, 'look' | 'lookAhead' | 'lookBack' | 'more'>
 
 export type ILCode = {
-  text?: string;
-  raw?: any;
-  ignore?: boolean;
-};
+  text?: string
+  raw?: any
+  ignore?: boolean
+}
 
-export type ILToken = (index: number, array: ILToken[]) => ILCode;
+export type ILToken = (index: number, array: ILToken[]) => ILCode
 
-export type TContext = Record<string, unknown>;
+export type TContext = Record<string, unknown>
 export type TGrammar = {
   [key in TokenName]: <T>(obj: TContext, token: Token<T>) => void
-};
-
+}
 
 export enum TokenName {
   GROUP = 'GROUP',
@@ -38,15 +37,14 @@ export enum TokenName {
 }
 
 export type Token = {
-  token: TokenName,
-  value?: string,
-  parent?: Token,
-  children: Token[],
-  ignore?: boolean,
+  token: TokenName
+  value?: string
+  parent?: Token
+  children: Token[]
+  ignore?: boolean
   context?: TContext
-};
+}
 
-export type Tokenizer = (reader: Reader, token: Token) => void;
+export type Tokenizer = (reader: Reader, token: Token) => void
 
-export type Rule = [(r: ReaderReadOnly) => boolean, TokenName, Tokenizer];
-
+export type Rule = [(r: ReaderReadOnly) => boolean, TokenName, Tokenizer]

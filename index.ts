@@ -1,17 +1,17 @@
-import { reader } from './reader';
-import { tokenizer } from './tokenizer';
-import { parser } from './parser';
-import { interpret } from './il';
+import { reader } from './reader'
+import { tokenizer } from './tokenizer'
+import { parser } from './parser'
+import { interpret } from './il'
 
 export const interpolation = (obj: Record<string, unknown>) => ({
   interpolate(this: void, fmt?: string) {
-    if (!fmt) return '';
-    const r = reader(fmt);
-    const t = tokenizer(r);
-    const il = parser(obj, t);
-    return interpret(il);
+    if (!fmt) return ''
+    const r = reader(fmt)
+    const t = tokenizer(r)
+    const il = parser(obj, t)
+    return interpret(il)
   },
-});
+})
 
 export const interpolate = (obj: Record<string, unknown>, fmt?: string) =>
-  interpolation(obj).interpolate(fmt);
+  interpolation(obj).interpolate(fmt)
