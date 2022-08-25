@@ -119,16 +119,30 @@ export const parse = (format: string): GroupNode => {
     }
     next()
 
-    group.body = buildChains(buildAlternatives(dropSpacesAroundOperators(pieces)))
+    group.body = buildChains(buildAlternatives(dropSpacesAroundPipes(absorbSpacesIntoSeparators(pieces))))
     return group
   }
 
-  const dropSpacesAroundOperators = (pieces: Piece[]) => {
-    const isOperator = (piece: Piece | undefined) => piece?.kind === 'separator' || piece?.kind === 'pipe'
-    return pieces.filter(
-      (piece, i) => piece.kind !== 'space' || !(isOperator(pieces[i - 1]) || isOperator(pieces[i + 1])),
-    )
+  const absorbSpacesIntoSeparators = (pieces: Piece[]) => {
+    const result: Piece[] = []
+    pieces.forEach((piece, i) => {
+      const following = pieces[i + 1]
+      const previous = result.at(-1)
+      if (piece.kind === 'space' && following?.kind === 'separator') {
+        following.group.body.unshift({ type: 'text', value: piece.value })
+      } else if (piece.kind === 'space' && previous?.kind === 'separator') {
+        previous.group.body.push({ type: 'text', value: piece.value })
+      } else {
+        result.push(piece)
+      }
+    })
+    return result
   }
+
+  const dropSpacesAroundPipes = (pieces: Piece[]) =>
+    pieces.filter(
+      (piece, i) => piece.kind !== 'space' || !(pieces[i - 1]?.kind === 'pipe' || pieces[i + 1]?.kind === 'pipe'),
+    )
 
   const buildAlternatives = (pieces: Piece[]) => {
     const result: Piece[] = []

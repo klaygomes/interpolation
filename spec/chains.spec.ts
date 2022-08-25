@@ -16,13 +16,26 @@ describe('chains', () => {
   })
 
   it.each([
-    ['.a <, > .b', { a: 'A', b: 'B' }, 'A, B'],
-    ['.a <, > .b tail', { a: 'A', b: 'B' }, 'A, B tail'],
+    ['.a <, > .b', { a: 'A', b: 'B' }, 'A ,  B'],
+    ['.a <, > .b', { a: 'A' }, 'A'],
+    ['.a <, > .b tail', { a: 'A', b: 'B' }, 'A ,  B tail'],
+    ['.a <,> {.b}', { a: 'A', b: 'B' }, 'A , B'],
+    ['a <,> b', {}, 'a , b'],
     ['.a<, >.b .c', { a: 'A', b: 'B', c: 'C' }, 'A, B C'],
     ['x<, >.a', { a: 'A' }, 'x, A'],
     ['x<, >.a .b', { b: 'B' }, 'x B'],
     ['{x}<, >.a', { a: 'A' }, 'x, A'],
-  ])('treats whitespace and literals in %s', (fmt, data, expected) => {
+    ['.price< kr> more', { price: 10 }, '10 kr more'],
+    ['.price< kr> more', {}, 'more'],
+    ['price< kr> more', {}, 'price kr more'],
+    ['more <kr >.price', { price: 10 }, 'more kr 10'],
+    ['more <kr >price', {}, 'more kr price'],
+    ['Phone number<: >.phone', { phone: '555' }, 'Phone number: 555'],
+    ['Phone .label<: >.phone', { label: 'number', phone: '555' }, 'Phone number: 555'],
+    ['Phone number <: >.phone', { phone: '555' }, 'Phone number : 555'],
+    ['Phone .label <: >.phone', { label: 'number', phone: '555' }, 'Phone number : 555'],
+    ['Phone number <: >.phone', { phone: '' }, 'Phone number'],
+  ])('keeps whitespace around separators as part of the separator in %s', (fmt, data, expected) => {
     expect(format(fmt, data)).toBe(expected)
   })
 
