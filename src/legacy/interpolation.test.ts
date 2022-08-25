@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { interpolation } from './index'
-import address from './fixtures/google-stadsgardshamnen22.se.json'
+import address from '../../spec/fixtures/google-stadsgardshamnen22.se.json'
 
 describe('interpolation', () => {
   it('should extract field', () => {
@@ -214,7 +214,7 @@ describe('interpolation', () => {
   // data mapping bugs
   it.skip('u Jezera 767/', () => {
     expect.hasAssertions()
-    const data = require('./fixtures/google-u-jezera-767.cz.json')
+    const data = require('../../spec/fixtures/google-u-jezera-767.cz.json')
     const { interpolate } = interpolation(data.result)
     const fmt =
       '.address_components[types=route].short_name< >{.address_components[types=premise].short_name</>.address_components[types=street_number].short_name}'
